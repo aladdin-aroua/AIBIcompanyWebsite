@@ -1,0 +1,21 @@
+{
+    "features": {
+      "title": "Our Features",
+      "subtitle": "Discover what we offer.",
+      "items": [
+        {
+          "name": "Advanced AI Integration",
+          "description": "Seamlessly integrate AI into your existing systems for smarter decision-making."
+        },
+        {
+          "name": "Real-time Analytics",
+          "description": "Get instant insights with our real-time BI dashboards and reporting tools."
+        },
+        {
+          "name": "Predictive Modeling",
+          "description": "Forecast trends and make data-driven decisions with our predictive models."
+        }
+      ]
+    }
+  }
+  
