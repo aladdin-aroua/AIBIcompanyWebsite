@@ -3,7 +3,6 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About",
-      portfolio: "Project Portfolio",
       blog: "Blog",
       contact: "Contact",
       services: "Services"
@@ -14,8 +13,8 @@ export const translations = {
       button: "Learn More"
     },
     caseStudies: {
-      title: "Our Success Stories",
-      subtitle: "Discover how we've helped businesses like yours."
+      title: "Our Main Sectors",
+      subtitle: "Discover our expertise across key industries."
     },
     about: {
       title: "About Us",

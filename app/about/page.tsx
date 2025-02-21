@@ -1,16 +1,24 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Users, Zap, Sliders, Eye, CheckCircle, Star, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useLanguage } from '../context/LanguageContext'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import Link from 'next/link'
 
 export default function About() {
-  const { t } = useLanguage()
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
 
-  // Container and item animations for staggered transitions
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false)
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,119 +36,124 @@ export default function About() {
     }
   }
 
+  const values = [
+    { icon: Users, title: "Collaboration", description: "We place collaboration at the heart of our DNA to maximize value." },
+    { icon: Zap, title: "Performance", description: "Our team leverages proven expertise for efficient solutions." },
+    { icon: Sliders, title: "Flexibility", description: "We adapt to your needs and constraints with agility." },
+    { icon: Eye, title: "Transparency", description: "We believe in building trust through complete transparency." },
+    { icon: CheckCircle, title: "Rigor", description: "We attach immense importance to precision and quality." },
+    { icon: Star, title: "Excellence", description: "We strive for excellence in everything we do." }
+  ]
+
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-white flex flex-col min-h-screen overflow-hidden">
-      {/* Header */}
+    <div className="relative bg-gradient-to-b from-gray-50 to-white min-h-screen overflow-hidden">
       <Header />
 
-      {/* Top Decorative Wave */}
-      <div className="absolute top-0 left-0 w-full">
-        <svg className="w-full h-16" fill="currentColor" viewBox="0 0 1440 320">
-          <path
-            fill="#fff"
-            fillOpacity="1"
-            d="M0,64L80,80C160,96,320,128,480,154.7C640,181,800,203,960,181.3C1120,160,1280,96,1360,64L1440,32L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-          ></path>
-        </svg>
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-grow pt-20">
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="max-w-5xl mx-auto flex flex-col items-center space-y-12"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
+      <main className="pt-20 pb-16">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-extrabold text-center mb-8"
           >
-            {/* Title with Gradient Text */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-5xl font-extrabold text-center bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent"
-            >
-              {t('about.title')}
-            </motion.h1>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
+              About AIBI Solutions
+            </span>
+          </motion.h1>
 
-            {/* Subheading */}
-            <motion.h2
-              variants={itemVariants}
-              className="text-2xl text-gray-700 font-bold text-center"
-            >
-              {t('about.subtitle')}
-            </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto"
+          >
+            We are pioneers in AI and BI solutions, dedicated to transforming businesses through cutting-edge technology and data-driven insights.
+          </motion.p>
 
-            {/* Intro Paragraph */}
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl"
-            >
-              {t('about.intro')}
-            </motion.p>
-
-            {/* Feature Cards */}
-            <motion.div
-              variants={containerVariants}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
-            >
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          >
+            {values.map((value, index) => (
               <motion.div
+                key={index}
                 variants={itemVariants}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1"
+                className="bg-white rounded-lg shadow-lg p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <h3 className="text-xl font-semibold mb-2 text-center">
-                  {t('about.values.collaboration')}
-                </h3>
+                <div className="flex items-center mb-4">
+                  <value.icon className="w-8 h-8 text-blue-500 mr-3" />
+                  <h3 className="text-xl font-semibold text-gray-800">{value.title}</h3>
+                </div>
+                <p className="text-gray-600">{value.description}</p>
               </motion.div>
-              <motion.div
-                variants={itemVariants}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1"
-              >
-                <h3 className="text-xl font-semibold mb-2 text-center">
-                  {t('about.values.performance')}
-                </h3>
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1"
-              >
-                <h3 className="text-xl font-semibold mb-2 text-center">
-                  {t('about.values.flexibility')}
-                </h3>
-              </motion.div>
-            </motion.div>
+            ))}
+          </motion.div>
 
-            {/* Mission / Closing Paragraph */}
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl"
-            >
-              {t('about.mission')}
-            </motion.p>
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              To empower businesses with innovative AI and BI solutions, enabling data-driven decision-making and fostering growth across industries.
+            </p>
+          </motion.div>
 
-            {/* CTA Button */}
-            <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="text-center">
+            <Link href="/contact" passHref>
               <Button
                 size="lg"
-                className="bg-indigo-600 text-white hover:bg-indigo-700 flex items-center transition-colors"
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300"
               >
-                {t('about.cta')}
+                Join Our Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </main>
+      <AnimatePresence>
+        {isContactFormOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-lg p-8 max-w-md w-full"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-800">Contact Us</h2>
+                <button onClick={() => setIsContactFormOpen(false)} className="text-gray-500 hover:text-gray-700">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <form className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <Input id="name" placeholder="Your name" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <Input id="email" type="email" placeholder="your@email.com" />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                  <Textarea id="message" placeholder="Your message" rows={4} />
+                </div>
+                <Button type="submit" className="w-full bg-blue-500 text-white hover:bg-blue-600">
+                  Send Message
+                </Button>
+              </form>
             </motion.div>
           </motion.div>
-        </section>
-      </main>
+        )}
+      </AnimatePresence>
 
-      {/* Bottom Decorative Wave */}
-      <div className="absolute bottom-0 left-0 w-full">
-        <svg className="w-full h-16" fill="currentColor" viewBox="0 0 1440 320">
-          <path
-            fill="#fff"
-            fillOpacity="1"
-            d="M0,256L80,245.3C160,235,320,213,480,197.3C640,181,800,171,960,149.3C1120,128,1280,96,1360,80L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-          ></path>
-        </svg>
-      </div>
-      {/* Footer */}
       <Footer />
     </div>
   )

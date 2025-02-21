@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useTranslation } from "../hooks/useTranslation"
+import Link from 'next/link'
 
 const images = [
   "/first-home-page.webp?height=600&width=1200&text=AI+Solutions",
@@ -19,7 +20,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prevImage) => (prevImage + 1) % images.length)
-    }, 3000)
+    }, 2000)
 
     return () => clearInterval(timer)
   }, [])
@@ -77,20 +78,24 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
-            >
-              {t("Learn More")}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
-            >
-              {t("Contact Us")}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <Link href="/about" passHref>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
+              >
+                {t("Learn More")}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/contact" passHref>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
+              >
+                {t("Contact Us")}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

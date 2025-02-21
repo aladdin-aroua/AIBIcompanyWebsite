@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronDown, Menu } from "lucide-react"
+import { ChevronDown, Menu, Lightbulb, PieChart, Smartphone } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { useLanguage } from '../context/LanguageContext'
@@ -10,22 +10,22 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 
 const services = [
   {
-    mainService: "Artificial Intelligence Consulting",
-    subService: "Machine Learning Solutions",
-    href: "/services/ai-consulting",
-    icon: "🤖",
+    mainService: "Consultation Services",
+    subService: "Machine Learning and BI Solutions",
+    href: "/services/consultation-services",
+    icon: Lightbulb,
   },
   {
-    mainService: "Application Development",
+    mainService: "BI Project Management",
     subService: "Computer Vision AI",
-    href: "/services/app-development",
-    icon: "💻",
+    href: "/services/bi-project-management",
+    icon: PieChart,
   },
   {
-    mainService: "Business Services",
+    mainService: "AI Development",
     subService: "Chatbot Development Services",
     href: "/services/business-services",
-    icon: "🔧",
+    icon: Smartphone,
   },
 ]
 
@@ -47,7 +47,6 @@ export default function Header() {
   const navItems = [
     { name: t('nav.home'), href: "/", color: "text-[#3b82f6]" },
     { name: t('nav.about'), href: "/about", color: "text-white" },
-    { name: t('nav.portfolio'), href: "/portfolio", color: "text-white" },
     { name: t('nav.blog'), href: "/blog", color: "text-white" },
     { name: t('nav.contact'), href: "/contact", color: "text-white" },
   ]
@@ -123,7 +122,9 @@ export default function Header() {
                             className="flex items-center justify-between p-4 hover:bg-blue-50 transition-colors duration-200"
                           >
                             <div className="flex items-center space-x-4">
-                              <span className="text-2xl">{service.icon}</span>
+                              <span className="text-2xl">
+                                {typeof service.icon === 'string' ? service.icon : <service.icon />}
+                              </span>
                               <div>
                                 <div className="text-[#3b82f6] font-medium">{service.mainService}</div>
                                 <div className="text-gray-900 mt-1">{service.subService}</div>
@@ -163,6 +164,29 @@ export default function Header() {
                     {item.name}
                   </Link>
                 ))}
+                {/* Mobile Services Dropdown */}
+                <div className="mt-2">
+                  <button
+                    onClick={() => setIsServicesOpen(!isServicesOpen)}
+                    className="flex items-center justify-between w-full text-white px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 transition-colors duration-200"
+                  >
+                    <span>{t('nav.services')}</span>
+                    <ChevronDown className={`h-5 w-5 transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {isServicesOpen && (
+                    <div className="mt-2 space-y-1">
+                      {services.map((service) => (
+                        <Link
+                          key={service.mainService}
+                          href={service.href}
+                          className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800 transition-colors duration-200"
+                        >
+                          {service.mainService}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}

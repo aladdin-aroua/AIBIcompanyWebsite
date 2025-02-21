@@ -4,32 +4,47 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 
-interface BlogPost {
-  id: number
-  title: string
-  summary: string
-  slug: string
-}
-
-const blogPosts: BlogPost[] = [
+const blogPosts = [
   {
     id: 1,
-    title: "Understanding AI",
-    summary: "An introduction to artificial intelligence and its applications.",
-    slug: "understanding-ai"
+    title: "The Future of AI in Business",
+    excerpt: "Explore how artificial intelligence is reshaping the business landscape and what it means for your company.",
+    author: "Jane Doe",
+    date: "May 15, 2023",
+    image: "/the-future-of-AI.webp?height=200&width=300",
   },
   {
     id: 2,
-    title: "The Future of BI",
-    summary: "Exploring the future trends in business intelligence.",
-    slug: "future-of-bi"
+    title: "Leveraging Big Data for Better Decision Making",
+    excerpt: "Learn how to harness the power of big data analytics to drive informed business decisions.",
+    author: "John Smith",
+    date: "June 2, 2023",
+    image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: 3,
-    title: "Data Analytics in 2023",
-    summary: "Key trends and technologies in data analytics for the coming year.",
-    slug: "data-analytics-2023"
-  }
+    title: "The Rise of Natural Language Processing",
+    excerpt: "Discover how NLP is transforming customer service, content creation, and more.",
+    author: "Alice Johnson",
+    date: "June 20, 2023",
+    image: "/placeholder.svg?height=200&width=300",
+  },
+  {
+    id: 4,
+    title: "Blockchain in BI: A Game Changer",
+    excerpt: "Uncover how blockchain technology is revolutionizing business intelligence and data security.",
+    author: "Bob Wilson",
+    date: "July 5, 2023",
+    image: "/placeholder.svg?height=200&width=300",
+  },
+  {
+    id: 5,
+    title: "The Ethics of AI: Navigating the Gray Areas",
+    excerpt: "Delve into the ethical considerations surrounding AI implementation in various industries.",
+    author: "Eva Green",
+    date: "July 18, 2023",
+    image: "/placeholder.svg?height=200&width=300",
+  },
 ]
 
 export default function BlogList() {
@@ -64,11 +79,17 @@ export default function BlogList() {
               transition={{ duration: 0.8, delay: index * 0.1 }}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
+              <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-48 object-cover" />
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{post.title}</h3>
-                <p className="text-gray-600 mb-4">{post.summary}</p>
+                <p className="text-gray-600 mb-4">{post.excerpt}</p>
                 <div className="flex items-center justify-between">
-                  <Link href={`/blog/${post.slug}`} className="text-blue-500 hover:underline">
+                  <div className="text-sm text-gray-500">
+                    <span>{post.author}</span>
+                    <span className="mx-1">•</span>
+                    <span>{post.date}</span>
+                  </div>
+                  <Link href={`/blog/${post.id}`} className="text-blue-500 hover:underline">
                     Read More
                   </Link>
                 </div>
