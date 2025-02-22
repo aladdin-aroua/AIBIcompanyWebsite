@@ -92,10 +92,8 @@ export default function MachineLearning() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <Link href="/contact" passHref>
-            <a className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-200 transition">
-              Contact Us
-            </a>
+          <Link href="/contact" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-200 transition">
+            Contact Us
           </Link>
         </motion.div>
       </section>

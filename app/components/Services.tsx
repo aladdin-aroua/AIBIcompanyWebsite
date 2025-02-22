@@ -19,9 +19,9 @@ const services = [
   },
   {
     icon: Smartphone,
-    title: "Mobile & AI Development",
+    title: "AI Development",
     description:
-      "To increase your performance and optimize decision-making, we develop custom, high-performance mobile applications and artificial intelligence solutions.",
+      "To increase your performance and optimize decision-making, we develop custom, high-performance applications and artificial intelligence solutions.",
   },
 ]
 

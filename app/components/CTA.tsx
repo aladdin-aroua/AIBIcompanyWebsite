@@ -3,10 +3,8 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Mail, Phone, MapPin } from "lucide-react"
-import { useLanguage } from '../context/LanguageContext'
 
 export default function Contact() {
-  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -50,12 +48,8 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-extrabold sm:text-4xl">
-            {t('contact.title')}
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-blue-200">
-            {t('contact.subtitle')}
-          </p>
+          <h2 className="text-3xl font-extrabold sm:text-4xl">Get in Touch</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-blue-200">Have questions? We're here to help!</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -67,7 +61,7 @@ export default function Contact() {
             <form className="bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-8">
               <div className="mb-6">
                 <label htmlFor="name" className="block text-blue-200 font-semibold mb-2">
-                  {t('contact.form.name')}
+                  Name
                 </label>
                 <input
                   type="text"
@@ -75,12 +69,12 @@ export default function Contact() {
                   name="name"
                   className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
                   required
-                  placeholder={t('contact.form.namePlaceholder')}
+                  placeholder="Your Name"
                 />
               </div>
               <div className="mb-6">
                 <label htmlFor="email" className="block text-blue-200 font-semibold mb-2">
-                  {t('contact.form.email')}
+                  Email
                 </label>
                 <input
                   type="email"
@@ -88,12 +82,12 @@ export default function Contact() {
                   name="email"
                   className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
                   required
-                  placeholder={t('contact.form.emailPlaceholder')}
+                  placeholder="your@email.com"
                 />
               </div>
               <div className="mb-6">
                 <label htmlFor="message" className="block text-blue-200 font-semibold mb-2">
-                  {t('contact.form.message')}
+                  Message
                 </label>
                 <textarea
                   id="message"
@@ -101,14 +95,14 @@ export default function Contact() {
                   rows={4}
                   className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
                   required
-                  placeholder={t('contact.form.messagePlaceholder')}
+                  placeholder="Your message here..."
                 ></textarea>
               </div>
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
               >
-                {t('contact.form.submit')}
+                Send Message
               </button>
             </form>
           </motion.div>
@@ -119,27 +113,19 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-8"
           >
-            <h3 className="text-2xl font-semibold mb-6">
-              {t('contact.info.title')}
-            </h3>
+            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">
-                  {t('contact.info.email')}
-                </span>
+                <span className="text-blue-100">info@aibi-solutions.com</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">
-                  {t('contact.info.phone')}
-                </span>
+                <span className="text-blue-100">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">
-                  {t('contact.info.address')}
-                </span>
+                <span className="text-blue-100">123 AI Street, Tech City, TC 12345</span>
               </div>
             </div>
           </motion.div>
