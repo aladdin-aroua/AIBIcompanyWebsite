@@ -6,7 +6,6 @@ import { ChevronDown, Menu, Lightbulb, PieChart, Smartphone, Brain } from "lucid
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { useLanguage } from '../context/LanguageContext'
-import { LanguageSwitcher } from './LanguageSwitcher'
 
 const services = [
   {
@@ -81,8 +80,8 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          {/* Centered Desktop navigation */}
+          <div className="hidden lg:flex items-center justify-center flex-grow space-x-8">
             {navItems.map((item, index) => (
               <Link key={item.name} href={item.href} className="relative group">
                 <motion.span
@@ -152,9 +151,6 @@ export default function Header() {
               </AnimatePresence>
             </div>
           </div>
-
-          {/* Language Switcher */}
-          <LanguageSwitcher />
         </div>
 
         {/* Mobile menu */}

@@ -7,7 +7,7 @@ import { LanguageProvider } from './context/LanguageContext'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AIBI Solutions - Empowering Business with AI and BI",
+  title: "FPAI - Empowering Business with AI and BI",
   description: "Transform your business with cutting-edge AI and BI solutions",
 }
 

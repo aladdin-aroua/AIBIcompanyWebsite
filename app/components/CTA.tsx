@@ -117,7 +117,7 @@ export default function Contact() {
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">info@aibi-solutions.com</span>
+                <span className="text-blue-100">contact@fpai.ca</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-6 w-6 text-blue-300 mr-4" />
@@ -125,7 +125,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">123 AI Street, Tech City, TC 12345</span>
+                <span className="text-blue-100">1190 Rue du Fort #303, Montréal, QC H3H 2B5</span>
               </div>
             </div>
           </motion.div>

@@ -62,7 +62,7 @@ export default function About() {
             className="text-5xl md:text-6xl font-extrabold text-center mb-8"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
-              About AIBI Solutions
+              About FPAI
             </span>
           </motion.h1>
 

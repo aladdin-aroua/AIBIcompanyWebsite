@@ -9,7 +9,6 @@ import CTA from "./components/CTA"
 import Footer from "./components/Footer"
 import Blog from "./components/Blog"
 import Careers from './components/Careers'
-import Services from './components/Services'
 
 export default function Home() {
   return (
@@ -18,7 +17,6 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
-        <Services />
         <CaseStudies />
         <About />
         <Blog />

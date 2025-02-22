@@ -43,7 +43,7 @@ export default function Careers() {
           Join Our Team of Innovators
         </motion.h2>
         <motion.p variants={itemVariants} className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          At AIBI Solutions, we're always on the lookout for brilliant minds to help us shape the future of AI and BI. If you're passionate about pushing the boundaries of technology, we want to hear from you.
+          At FPAI, we're always on the lookout for brilliant minds to help us shape the future of AI and BI. If you're passionate about pushing the boundaries of technology, we want to hear from you.
         </motion.p>
 
         <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -56,9 +56,6 @@ export default function Careers() {
               <position.icon className="w-12 h-12 text-blue-500 mb-6" />
               <h3 className="text-2xl font-bold text-gray-900 mb-4">{position.title}</h3>
               <p className="text-gray-600 mb-6">{position.description}</p>
-              <a href="#" className="inline-flex items-center text-blue-500 font-semibold hover:text-blue-600 transition-colors duration-300">
-                Learn More <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
             </motion.div>
           ))}
         </motion.div>
@@ -67,17 +64,11 @@ export default function Careers() {
           <h3 className="text-2xl font-bold text-gray-900 mb-4">Don't see a perfect fit?</h3>
           <p className="text-gray-600 mb-8">
             We're always interested in meeting talented individuals. Send your resume to{" "}
-            <a href="mailto:careers@aibi-solutions.com" className="text-blue-500 hover:underline">
-              careers@aibi-solutions.com
+            <a href="mailto:careers@fpai.ca" className="text-blue-500 hover:underline">
+              careers@fpai.ca
             </a>
             , and let's start a conversation about your future with us.
           </p>
-          <a
-            href="#"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
-          >
-            View All Openings <ArrowRight className="ml-2 w-5 h-5" />
-          </a>
         </motion.div>
       </motion.div>
     </section>

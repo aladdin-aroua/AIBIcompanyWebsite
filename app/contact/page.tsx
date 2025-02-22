@@ -132,7 +132,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-100">Email</h3>
-                  <p className="text-gray-300">info@aibi-solutions.com</p>
+                  <p className="text-gray-300">contact@fpai.ca</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
