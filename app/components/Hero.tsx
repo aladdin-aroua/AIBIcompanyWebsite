@@ -57,7 +57,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <span className="block">{"Transform Your Business with AI"}</span>
+            <span className="block">{"Harness the Power of AI & BI"}</span>
             <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
               {t("Innovate. Optimize. Succeed.")}
             </span>

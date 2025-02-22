@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer"
 
 const blogPosts = [
   {
+    id: 1,
     title: "The Future of AI in Business",
     excerpt:
       "Explore how artificial intelligence is reshaping the business landscape and what it means for your company.",
@@ -13,6 +14,7 @@ const blogPosts = [
     image: "/the-future-of-AI.webp?height=200&width=300",
   },
   {
+    id: 2,
     title: "Leveraging Big Data for Better Decision Making",
     excerpt: "Learn how to harness the power of big data analytics to drive informed business decisions.",
     author: "John Smith",
@@ -20,6 +22,7 @@ const blogPosts = [
     image: "/leveraging-big-data.webp?height=200&width=300",
   },
   {
+    id: 3,
     title: "The Rise of Natural Language Processing",
     excerpt: "Discover how NLP is transforming customer service, content creation, and more.",
     author: "Alice Johnson",
@@ -52,7 +55,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
             <motion.div
-              key={post.title}
+              key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -70,7 +73,7 @@ export default function Blog() {
                     <span className="mx-1">•</span>
                     <span>{post.date}</span>
                   </div>
-                  <a href="#" className="text-blue-500 hover:underline">
+                  <a href={`/blog/${post.id}`} className="text-blue-500 hover:underline">
                     Read More
                   </a>
                 </div>
