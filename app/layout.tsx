@@ -9,6 +9,11 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "FPAI - Empowering Business with AI and BI",
   description: "Transform your business with cutting-edge AI and BI solutions",
+  "icons":{
+    icon:['/favicon.ico?v=4'],
+    apple:['/apple-touch-icon.png?v=4'],
+    shortcut:['/apple-touch-icon.png']
+  }
 }
 
 export default function RootLayout({
