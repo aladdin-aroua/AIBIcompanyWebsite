@@ -4,15 +4,48 @@ import { motion } from "framer-motion"
 import { Users, Zap, Sliders, Eye, CheckCircle, Star, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function About() {
+  const { t } = useLanguage()
+
   const values = [
-    { icon: Users, title: "Collaboration", description: "Maximizing value through teamwork", color: "blue" },
-    { icon: Zap, title: "Performance", description: "Expertise for efficiency and speed", color: "purple" },
-    { icon: Sliders, title: "Flexibility", description: "Adapting to unique business needs", color: "pink" },
-    { icon: Eye, title: "Transparency", description: "Building trust through openness", color: "indigo" },
-    { icon: CheckCircle, title: "Rigor", description: "Ensuring precision in every detail", color: "cyan" },
-    { icon: Star, title: "Excellence", description: "Striving for the highest standards", color: "teal" },
+    {
+      icon: Users,
+      title: t("about.values.0.title"),
+      description: t("about.values.0.description"),
+      color: "blue"
+    },
+    {
+      icon: Zap,
+      title: t("about.values.1.title"),
+      description: t("about.values.1.description"),
+      color: "purple"
+    },
+    {
+      icon: Sliders,
+      title: t("about.values.2.title"),
+      description: t("about.values.2.description"),
+      color: "pink"
+    },
+    {
+      icon: Eye,
+      title: t("about.values.3.title"),
+      description: t("about.values.3.description"),
+      color: "indigo"
+    },
+    {
+      icon: CheckCircle,
+      title: t("about.values.4.title"),
+      description: t("about.values.4.description"),
+      color: "cyan"
+    },
+    {
+      icon: Star,
+      title: t("about.values.5.title"),
+      description: t("about.values.5.description"),
+      color: "teal"
+    },
   ]
 
   const colorMap: { [key: string]: string } = {
@@ -26,7 +59,7 @@ export default function About() {
 
   return (
     <section className="relative py-20 bg-gradient-to-b from-white to-gray-100">
-      {/* Simplified Background */}
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(96,165,250,0.1),transparent)]" />
       </div>
@@ -38,9 +71,11 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900">Our Core Values</h2>
+          <h2 className="text-4xl font-bold text-gray-900">
+            {t("about.title")}
+          </h2>
           <p className="text-lg text-gray-600 mt-4">
-            These principles drive our commitment to excellence and guide everything we do.
+            {t("about.subtitle")}
           </p>
         </motion.div>
 
@@ -63,21 +98,22 @@ export default function About() {
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Button */}
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 text-center"
         >
-        <Link href="/contact" passHref>
-          <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-transform hover:scale-105"
-          >
-            Partner with Us <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </Link>
+          <Link href="/contact" passHref>
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-transform hover:scale-105"
+            >
+              {t("about.button")}
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

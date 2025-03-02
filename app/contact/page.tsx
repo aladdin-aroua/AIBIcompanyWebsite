@@ -10,8 +10,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { toast, Toaster } from "react-hot-toast"
+import { useLanguage } from "../context/LanguageContext"
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -34,7 +36,7 @@ export default function Contact() {
     e.preventDefault()
 
     if (!formState.name || !formState.email || !formState.message) {
-      toast.error("All fields are required.")
+      toast.error(t("contact.errors.required"))
       return
     }
 
@@ -50,13 +52,13 @@ export default function Contact() {
       const result = await response.json()
 
       if (response.ok) {
-        toast.success("🎉 Message sent successfully!")
+        toast.success(t("contact.success"))
         setFormState({ name: "", email: "", message: "" })
       } else {
-        toast.error(result.error || "❌ Failed to send message.")
+        toast.error(result.error || t("contact.errors.failed"))
       }
     } catch (err) {
-      toast.error("⚠️ An error occurred while sending the message.")
+      toast.error(t("contact.errors.error"))
       console.error(err)
     } finally {
       setLoading(false)
@@ -90,7 +92,7 @@ export default function Contact() {
             className="text-5xl md:text-6xl font-extrabold text-center mb-8"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
-              Get in Touch
+              {t("contact.title")}
             </span>
           </motion.h1>
 
@@ -98,7 +100,7 @@ export default function Contact() {
             variants={itemVariants}
             className="text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto"
           >
-            Have a question or want to work together? We'd love to hear from you!
+            {t("contact.subtitle")}
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -106,21 +108,21 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                    Name
+                    {t("contact.form.name")}
                   </label>
                   <Input
                     id="name"
                     name="name"
                     value={formState.name}
                     onChange={handleInputChange}
-                    placeholder="Your name"
+                    placeholder={t("contact.placeholders.name")}
                     className="w-full bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                    Email
+                    {t("contact.form.email")}
                   </label>
                   <Input
                     id="email"
@@ -128,21 +130,21 @@ export default function Contact() {
                     type="email"
                     value={formState.email}
                     onChange={handleInputChange}
-                    placeholder="your@email.com"
+                    placeholder={t("contact.placeholders.email")}
                     className="w-full bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-                    Message
+                    {t("contact.form.message")}
                   </label>
                   <Textarea
                     id="message"
                     name="message"
                     value={formState.message}
                     onChange={handleInputChange}
-                    placeholder="Your message"
+                    placeholder={t("contact.placeholders.message")}
                     rows={4}
                     className="w-full bg-gray-700 text-white placeholder-gray-400 border-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   />
@@ -153,7 +155,7 @@ export default function Contact() {
                   disabled={loading}
                   className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transition-all duration-300"
                 >
-                  {loading ? "Sending..." : "Send Message"}
+                  {loading ? t("contact.sending") : t("contact.button")}
                   <Send className="ml-2 h-5 w-5" />
                 </Button>
               </form>
@@ -163,15 +165,15 @@ export default function Contact() {
               <div className="flex items-center space-x-4">
                 <Mail className="h-8 w-8 text-blue-400" />
                 <div>
-                  <h3 className="text-lg font-medium text-gray-100">Email</h3>
-                  <p className="text-gray-300">contact@fpai.ca</p>
+                  <h3 className="text-lg font-medium text-gray-100">{t("contact.form.email")}</h3>
+                  <p className="text-gray-300">info@fpai.ca</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
                 <Phone className="h-8 w-8 text-blue-400" />
                 <div>
-                  <h3 className="text-lg font-medium text-gray-100">Phone</h3>
+                  <h3 className="text-lg font-medium text-gray-100">{t("contact.phone")}</h3>
                   <p className="text-gray-300">+1 (514) 291-5123</p>
                 </div>
               </div>
@@ -179,7 +181,7 @@ export default function Contact() {
               <div className="flex items-center space-x-4">
                 <MapPin className="h-8 w-8 text-blue-400" />
                 <div>
-                  <h3 className="text-lg font-medium text-gray-100">Address</h3>
+                  <h3 className="text-lg font-medium text-gray-100">{t("contact.address")}</h3>
                   <p className="text-gray-300">1190 Rue du Fort #303, Montréal, QC H3H 2B5</p>
                 </div>
               </div>

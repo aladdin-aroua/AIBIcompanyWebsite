@@ -5,8 +5,10 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Mail, Phone, MapPin } from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
+import { useLanguage } from "../context/LanguageContext"
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -28,9 +30,8 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Form validation
     if (!formState.name || !formState.email || !formState.message) {
-      toast.error("All fields are required.")
+      toast.error(t("contact.errors.required"))
       return
     }
 
@@ -46,14 +47,14 @@ export default function Contact() {
       const result = await response.json()
 
       if (response.ok) {
-        toast.success("🎉 Message sent successfully!")
+        toast.success(t("contact.success"))
         setFormState({ name: "", email: "", message: "" })
       } else {
-        toast.error(result.error || "❌ Failed to send message.")
+        toast.error(result.error || t("contact.errors.failed"))
       }
     } catch (error) {
       console.error("Failed to send message:", error)
-      toast.error("⚠️ An error occurred. Please try again.")
+      toast.error(t("contact.errors.error"))
     } finally {
       setLoading(false)
     }
@@ -67,7 +68,7 @@ export default function Contact() {
     >
       <Toaster position="bottom-right" />
 
-      {/* Animated background elements */}
+      {/* Background animation */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -85,7 +86,7 @@ export default function Contact() {
             }}
             transition={{
               duration: Math.random() * 5 + 5,
-              repeat: Number.POSITIVE_INFINITY,
+              repeat: Infinity,
               ease: "easeInOut",
             }}
           />
@@ -99,8 +100,8 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-extrabold sm:text-4xl">Get in Touch</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-blue-200">Have questions? We're here to help!</p>
+          <h2 className="text-3xl font-extrabold sm:text-4xl">{t("contact.title")}</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-blue-200">{t("contact.subtitle")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -110,60 +111,43 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-8">
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-blue-200 font-semibold mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formState.name}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
-                  required
-                  placeholder="Your Name"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-blue-200 font-semibold mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formState.email}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
-                  required
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-blue-200 font-semibold mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formState.message}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
-                  required
-                  placeholder="Your message here..."
-                ></textarea>
-              </div>
+              {["name", "email", "message"].map((field) => (
+                <div key={field} className="mb-6">
+                  <label htmlFor={field} className="block text-blue-200 font-semibold mb-2">
+                    {t(`contact.form.${field}`)}
+                  </label>
+                  {field === "message" ? (
+                    <textarea
+                      id={field}
+                      name={field}
+                      value={formState[field as keyof typeof formState]}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
+                      required
+                      placeholder={t(`contact.placeholders.${field}`)}
+                    ></textarea>
+                  ) : (
+                    <input
+                      type={field === "email" ? "email" : "text"}
+                      id={field}
+                      name={field}
+                      value={formState[field as keyof typeof formState]}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 bg-white/20 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200"
+                      required
+                      placeholder={t(`contact.placeholders.${field}`)}
+                    />
+                  )}
+                </div>
+              ))}
 
               <button
                 type="submit"
                 disabled={loading}
                 className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
               >
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? t("contact.sending") : t("contact.button")}
               </button>
             </form>
           </motion.div>
@@ -174,11 +158,11 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-8"
           >
-            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-semibold mb-6">{t("contact.infoTitle")}</h3>
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-6 w-6 text-blue-300 mr-4" />
-                <span className="text-blue-100">contact@fpai.ca</span>
+                <span className="text-blue-100">info@fpai.ca</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-6 w-6 text-blue-300 mr-4" />

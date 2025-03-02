@@ -5,45 +5,45 @@ import { useInView } from "react-intersection-observer"
 import { Building2, Briefcase, Stethoscope, ShoppingCart, Truck, Lightbulb } from "lucide-react"
 import { useLanguage } from '../context/LanguageContext'
 
-const industries = [
-  {
-    name: "Finance",
-    icon: Briefcase,
-    description: "Optimize risk assessment, fraud detection, and algorithmic trading with our AI solutions.",
-  },
-  {
-    name: "Healthcare",
-    icon: Stethoscope,
-    description: "Enhance patient care with predictive diagnostics and personalized treatment plans.",
-  },
-  {
-    name: "Retail",
-    icon: ShoppingCart,
-    description: "Improve customer experience and inventory management with AI-driven insights.",
-  },
-  {
-    name: "Manufacturing",
-    icon: Truck,
-    description: "Optimize production processes and predict maintenance needs with our BI tools.",
-  },
-  {
-    name: "Energy",
-    icon: Lightbulb,
-    description: "Forecast demand, optimize distribution, and improve sustainability with AI analytics.",
-  },
-  {
-    name: "Real Estate",
-    icon: Building2,
-    description: "Leverage market trends and property valuation models for informed decision-making.",
-  },
-]
-
 export default function IndustryApplications() {
   const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+
+  const industries = [
+    {
+      name: t("industries.items.0.name"),
+      icon: Briefcase,
+      description: t("industries.items.0.description"),
+    },
+    {
+      name: t("industries.items.1.name"),
+      icon: Stethoscope,
+      description: t("industries.items.1.description"),
+    },
+    {
+      name: t("industries.items.2.name"),
+      icon: ShoppingCart,
+      description: t("industries.items.2.description"),
+    },
+    {
+      name: t("industries.items.3.name"),
+      icon: Truck,
+      description: t("industries.items.3.description"),
+    },
+    {
+      name: t("industries.items.4.name"),
+      icon: Lightbulb,
+      description: t("industries.items.4.description"),
+    },
+    {
+      name: t("industries.items.5.name"),
+      icon: Building2,
+      description: t("industries.items.5.description"),
+    },
+  ]
 
   return (
     <section ref={ref} className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -55,10 +55,10 @@ export default function IndustryApplications() {
           className="text-center"
         >
           <h2 className="text-3xl font-extrabold sm:text-4xl">
-            {t('caseStudies.title')}
+            {t('industries.title')}
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
-            {t('caseStudies.subtitle')}
+            {t('industries.subtitle')}
           </p>
         </motion.div>
 
@@ -89,4 +89,3 @@ export default function IndustryApplications() {
     </section>
   )
 }
-

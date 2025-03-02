@@ -3,8 +3,10 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { ArrowRight, Briefcase, Code, BarChartIcon as ChartBar } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Careers() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -26,9 +28,21 @@ export default function Careers() {
   }
 
   const positions = [
-    { title: "AI Research Scientist", icon: Briefcase, description: "Push the boundaries of AI technology and contribute to groundbreaking research." },
-    { title: "Full Stack AI Developer", icon: Code, description: "Build intelligent applications that leverage the latest in AI and machine learning." },
-    { title: "Data Analyst & BI Specialist", icon: ChartBar, description: "Transform complex data into actionable insights that drive business decisions." },
+    {
+      title: t("careers.positions.0.title"),
+      icon: Briefcase,
+      description: t("careers.positions.0.description")
+    },
+    {
+      title: t("careers.positions.1.title"),
+      icon: Code,
+      description: t("careers.positions.1.description")
+    },
+    {
+      title: t("careers.positions.2.title"),
+      icon: ChartBar,
+      description: t("careers.positions.2.description")
+    },
   ]
 
   return (
@@ -40,10 +54,10 @@ export default function Careers() {
         animate={inView ? "visible" : "hidden"}
       >
         <motion.h2 variants={itemVariants} className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-          Join Our Team of Innovators
+          {t("careers.title")}
         </motion.h2>
         <motion.p variants={itemVariants} className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          At FPAI, we're always on the lookout for brilliant minds to help us shape the future of AI and BI. If you're passionate about pushing the boundaries of technology, we want to hear from you.
+          {t("careers.subtitle")}
         </motion.p>
 
         <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -61,13 +75,15 @@ export default function Careers() {
         </motion.div>
 
         <motion.div variants={itemVariants} className="text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Don't see a perfect fit?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            {t("careers.contactTitle")}
+          </h3>
           <p className="text-gray-600 mb-8">
-            We're always interested in meeting talented individuals. Send your resume to{" "}
-            <a href="mailto:careers@fpai.ca" className="text-blue-500 hover:underline">
-              careers@fpai.ca
+            {t("careers.contactDescription")}{" "}
+            <a href="mailto:info@fpai.ca" className="text-blue-500 hover:underline">
+              info@fpai.ca
             </a>
-            , and let's start a conversation about your future with us.
+            .
           </p>
         </motion.div>
       </motion.div>

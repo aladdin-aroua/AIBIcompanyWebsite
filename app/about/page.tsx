@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,8 +10,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import Link from 'next/link'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function About() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -37,12 +39,12 @@ export default function About() {
   }
 
   const values = [
-    { icon: Users, title: "Collaboration", description: "We place collaboration at the heart of our DNA to maximize value." },
-    { icon: Zap, title: "Performance", description: "Our team leverages proven expertise for efficient solutions." },
-    { icon: Sliders, title: "Flexibility", description: "We adapt to your needs and constraints with agility." },
-    { icon: Eye, title: "Transparency", description: "We believe in building trust through complete transparency." },
-    { icon: CheckCircle, title: "Rigor", description: "We attach immense importance to precision and quality." },
-    { icon: Star, title: "Excellence", description: "We strive for excellence in everything we do." }
+    { icon: Users, title: t("aboutPage.values.0.title"), description: t("aboutPage.values.0.description") },
+    { icon: Zap, title: t("aboutPage.values.1.title"), description: t("aboutPage.values.1.description") },
+    { icon: Sliders, title: t("aboutPage.values.2.title"), description: t("aboutPage.values.2.description") },
+    { icon: Eye, title: t("aboutPage.values.3.title"), description: t("aboutPage.values.3.description") },
+    { icon: CheckCircle, title: t("aboutPage.values.4.title"), description: t("aboutPage.values.4.description") },
+    { icon: Star, title: t("aboutPage.values.5.title"), description: t("aboutPage.values.5.description") },
   ]
 
   return (
@@ -62,7 +64,7 @@ export default function About() {
             className="text-5xl md:text-6xl font-extrabold text-center mb-8"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
-              About FPAI
+              {t("aboutPage.title")}
             </span>
           </motion.h1>
 
@@ -70,7 +72,7 @@ export default function About() {
             variants={itemVariants}
             className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto"
           >
-            We are pioneers in AI and BI solutions, dedicated to transforming businesses through cutting-edge technology and data-driven insights.
+            {t("aboutPage.description")}
           </motion.p>
 
           <motion.div
@@ -93,9 +95,9 @@ export default function About() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">{t("aboutPage.missionTitle")}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              To empower businesses with innovative AI and BI solutions, enabling data-driven decision-making and fostering growth across industries.
+              {t("aboutPage.missionDescription")}
             </p>
           </motion.div>
 
@@ -105,13 +107,14 @@ export default function About() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-300"
               >
-                Join Our Journey
+                {t("aboutPage.cta")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </motion.div>
         </motion.div>
       </main>
+      
       <AnimatePresence>
         {isContactFormOpen && (
           <motion.div
@@ -127,26 +130,26 @@ export default function About() {
               className="bg-white rounded-lg p-8 max-w-md w-full"
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-800">Contact Us</h2>
+                <h2 className="text-2xl font-bold text-gray-800">{t("aboutPage.contactTitle")}</h2>
                 <button onClick={() => setIsContactFormOpen(false)} className="text-gray-500 hover:text-gray-700">
                   <X className="w-6 h-6" />
                 </button>
               </div>
               <form className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <Input id="name" placeholder="Your name" />
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t("contact.form.name")}</label>
+                  <Input id="name" placeholder={t("contact.placeholders.name")} />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <Input id="email" type="email" placeholder="your@email.com" />
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t("contact.form.email")}</label>
+                  <Input id="email" type="email" placeholder={t("contact.placeholders.email")} />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <Textarea id="message" placeholder="Your message" rows={4} />
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">{t("contact.form.message")}</label>
+                  <Textarea id="message" placeholder={t("contact.placeholders.message")} rows={4} />
                 </div>
                 <Button type="submit" className="w-full bg-blue-500 text-white hover:bg-blue-600">
-                  Send Message
+                  {t("contact.button")}
                 </Button>
               </form>
             </motion.div>

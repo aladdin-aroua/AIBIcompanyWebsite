@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { useTranslation } from "../hooks/useTranslation"
+import { useLanguage } from "../context/LanguageContext"
 import Link from 'next/link'
 
 const images = [
@@ -14,7 +14,7 @@ const images = [
 ]
 
 export default function Hero() {
-  const { t } = useTranslation()
+  const { t } = useLanguage()
   const [currentImage, setCurrentImage] = useState(0)
 
   useEffect(() => {
@@ -57,9 +57,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <span className="block">{"Harness the Power of AI & BI"}</span>
+            <span className="block">{t("hero.title")}</span>
             <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
-              {t("Innovate. Optimize. Succeed.")}
+              {t("hero.subtitle")}
             </span>
           </motion.h1>
 
@@ -69,7 +69,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            {t("Leverage cutting-edge AI and Business Intelligence to drive smarter decisions and optimize performance.")}
+            {t("hero.secondsubtitle")}
           </motion.p>
 
           <motion.div
@@ -83,7 +83,7 @@ export default function Hero() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
               >
-                {t("Learn More")}
+                {t("hero.button")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
@@ -92,7 +92,7 @@ export default function Hero() {
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
               >
-                {t("Contact Us")}
+                {t("hero.buttonContact")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

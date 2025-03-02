@@ -2,40 +2,41 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Future of AI in Business",
-    excerpt:
-      "Explore how artificial intelligence is reshaping the business landscape and what it means for your company.",
-    author: "Jane Doe",
-    date: "May 15, 2024",
-    image: "/the-future-of-AI.webp?height=200&width=300",
-  },
-  {
-    id: 2,
-    title: "Leveraging Big Data for Better Decision Making",
-    excerpt: "Learn how to harness the power of big data analytics to drive informed business decisions.",
-    author: "John Smith",
-    date: "June 10, 2024",
-    image: "/leveraging-big-data.webp?height=200&width=300",
-  },
-  {
-    id: 3,
-    title: "The Rise of Natural Language Processing",
-    excerpt: "Discover how NLP is transforming customer service, content creation, and more.",
-    author: "Alice Johnson",
-    date: "September 20, 2024",
-    image: "/rise-of-nlp.webp?height=200&width=300",
-  },
-]
+import { useLanguage } from "../context/LanguageContext"
 
 export default function Blog() {
+  const { t } = useLanguage()
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+
+  const blogPosts = [
+    {
+      id: 1,
+      title: t("blog.posts.0.title"),
+      excerpt: t("blog.posts.0.excerpt"),
+      author: t("blog.posts.0.author"),
+      date: t("blog.posts.0.date"),
+      image: "/the-future-of-AI.webp?height=200&width=300",
+    },
+    {
+      id: 2,
+      title: t("blog.posts.1.title"),
+      excerpt: t("blog.posts.1.excerpt"),
+      author: t("blog.posts.1.author"),
+      date: t("blog.posts.1.date"),
+      image: "/leveraging-big-data.webp?height=200&width=300",
+    },
+    {
+      id: 3,
+      title: t("blog.posts.2.title"),
+      excerpt: t("blog.posts.2.excerpt"),
+      author: t("blog.posts.2.author"),
+      date: t("blog.posts.2.date"),
+      image: "/rise-of-nlp.webp?height=200&width=300",
+    },
+  ]
 
   return (
     <section ref={ref} id="blog" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -46,9 +47,11 @@ export default function Blog() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">Latest from Our Blog</h2>
+          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+            {t("blog.title")}
+          </h2>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
-            Insights and updates from the world of AI and BI
+            {t("blog.subtitle")}
           </p>
         </motion.div>
 
@@ -74,7 +77,7 @@ export default function Blog() {
                     <span>{post.date}</span>
                   </div>
                   <a href={`/blog/${post.id}`} className="text-blue-500 hover:underline">
-                    Read More
+                    {t("blog.readMore")}
                   </a>
                 </div>
               </div>
@@ -84,4 +87,4 @@ export default function Blog() {
       </div>
     </section>
   )
-} 
+}
