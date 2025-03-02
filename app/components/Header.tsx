@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronDown, Menu, Lightbulb, PieChart, Smartphone, Brain } from "lucide-react"
+import { ChevronDown, Menu, Lightbulb, PieChart, Smartphone } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { useLanguage } from '../context/LanguageContext'
@@ -34,7 +34,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { language, toggleLanguage, t } = useLanguage()
+  const { t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,28 +62,26 @@ export default function Header() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          
-  {/* Logo and company name */}
-  <div className="flex items-center">
-    <Link href="/" className="flex items-center space-x-2">
-      <div className="w-10 h-10 transform transition-transform duration-300 hover:scale-110">
-        {/* Replaced Brain icon with the SVG logo */}
-        <img src="/fpai_logo.svg" alt="FPAI Logo" className="h-full w-full object-contain" />
-      </div>
-    </Link>
-  </div>
 
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
+          {/* Mobile Left: Menu */}
+          <div className="lg:hidden flex-1">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white p-2">
               <Menu className="h-6 w-6" />
             </button>
           </div>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item, index) => (
+          {/* Logo (left on desktop, center on mobile) */}
+          <div className="flex-1 flex justify-center lg:justify-start">
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-10 h-10 transform transition-transform duration-300 hover:scale-110">
+                <img src="/fpai_logo.svg" alt="FPAI Logo" className="h-full w-full object-contain" />
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Center Navigation */}
+          <div className="hidden lg:flex flex-1 justify-center space-x-8">
+            {navItems.map((item) => (
               <Link key={item.name} href={item.href} className="relative group">
                 <motion.span
                   className={`${item.color} hover:text-blue-400 transition-colors duration-200`}
@@ -135,7 +133,7 @@ export default function Header() {
                           >
                             <div className="flex items-center space-x-4">
                               <span className="text-2xl">
-                                {typeof service.icon === 'string' ? service.icon : <service.icon />}
+                                <service.icon />
                               </span>
                               <div>
                                 <div className="text-[#3b82f6] font-medium">{service.mainService}</div>
@@ -153,11 +151,19 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Language Switcher */}
-          <LanguageSwitcher />
+          {/* Mobile Right: Language Switcher */}
+          <div className="lg:hidden flex-1 flex justify-end">
+            <LanguageSwitcher />
+          </div>
+
+          {/* Desktop Right: Language Switcher */}
+          <div className="hidden lg:flex flex-1 justify-end">
+            <LanguageSwitcher />
+          </div>
+
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
